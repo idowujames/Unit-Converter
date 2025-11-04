@@ -26,13 +26,20 @@ let gallonToLiters = 0
 let kilosToPounds = 0
 let poundsToKilos = 0
 
+
+
 convertBtn.addEventListener("click", function(){
     
     const value = inputEl.value.trim()
 
+    if(isNaN(value) || value === ""){
+        reset()
+        errorTextEl.textContent = `Please enter a valid number` 
+        return
+    }
 
 
-    if (!isNaN(inputEl.value)){
+    if (!isNaN(value)){
         errorTextEl.textContent = ""
         // Length Conversion
         metersToFeet = convertLength("meter", value)
@@ -52,11 +59,6 @@ convertBtn.addEventListener("click", function(){
         massEl.textContent = `${value} kilos = ${kilosToPounds} pounds | ${value} pounds = ${poundsToKilos} kilos`   
     } 
 
-    else{
-        reset()
-        errorTextEl.textContent = `${value} is not a number` 
-    }
-
     
 })
 
@@ -65,6 +67,12 @@ function reset(){
     volumeEl.textContent = ""
     massEl.textContent = ""
 }
+
+inputEl.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        convertBtn.click()
+    }
+})
 
 
 
