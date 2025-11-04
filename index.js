@@ -16,23 +16,12 @@ const errorTextEl = document.getElementById("error-text")
 
 
 
-// 20 meters = 65.616 feet | 20 feet = 6.096 meters
-let metersToFeet = 0
-let feetToMeters = 0
-
-let litersToGallon = 0
-let gallonToLiters = 0
-
-let kilosToPounds = 0
-let poundsToKilos = 0
-
-
-
 convertBtn.addEventListener("click", function(){
     
-    const value = inputEl.value.trim()
+    const rawValue = inputEl.value.trim()
+    let value = Number(rawValue)
 
-    if(isNaN(value) || value === ""){
+    if(isNaN(value) || rawValue === "" || Number(value) < 0){
         reset()
         errorTextEl.textContent = `Please enter a valid number` 
         return
@@ -42,17 +31,17 @@ convertBtn.addEventListener("click", function(){
     if (!isNaN(value)){
         errorTextEl.textContent = ""
         // Length Conversion
-        metersToFeet = convertLength("meter", value)
-        feetToMeters = convertLength("feet", value)
+        const metersToFeet = convertLength("meter", value)
+        const feetToMeters = convertLength("feet", value)
 
         // Volume Conversion
-        litersToGallon = convertVolume("liters", value)
-        gallonToLiters = convertVolume("gallons", value)
+        const litersToGallon = convertVolume("liters", value)
+        const gallonToLiters = convertVolume("gallons", value)
 
 
         // Mass Conversion
-        kilosToPounds = convertMass("kilos", value)
-        poundsToKilos = convertMass("pounds", value)
+        const kilosToPounds = convertMass("kilos", value)
+        const poundsToKilos = convertMass("pounds", value)
 
         lengthEl.textContent = `${value} meters = ${metersToFeet} feet | ${value} feet = ${feetToMeters} meters`
         volumeEl.textContent = `${value} liters = ${litersToGallon} gallons | ${value} gallons = ${gallonToLiters} liters`
@@ -81,31 +70,31 @@ inputEl.addEventListener("keydown", function(e){
 
 function convertLength(metric,val){
     if (metric === "meter"){
-        return (Number(val) * 3.28084).toFixed(3)
+        return (val * 3.28084).toFixed(3)
     }
 
     else{
-        return (Number(val) * 0.3048).toFixed(3)
+        return (val * 0.3048).toFixed(3)
     }
 }
 
 function convertVolume(metric,val){
     if (metric === "liters"){
-        return (Number(val) *  0.264172).toFixed(3)
+        return (val *  0.264172).toFixed(3)
     }
 
     else{
-        return (Number(val) * 3.78541).toFixed(3)
+        return (val * 3.78541).toFixed(3)
     }
 }
 
 function convertMass(metric,val){
     if (metric === "kilos"){
-        return (Number(val) *  2.20462).toFixed(3)
+        return (val *  2.20462).toFixed(3)
     }
 
     else{
-        return (Number(val) * 0.453592).toFixed(3)
+        return (val * 0.453592).toFixed(3)
     }
 }
 
