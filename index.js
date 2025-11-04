@@ -7,16 +7,66 @@
 const inputEl = document.getElementById("input-el")
 const convertBtn = document.getElementById("convert-btn")
 
+const lengthEl = document.getElementById("length")
+const volumeEl = document.getElementById("volume")
+const massEl = document.getElementById("mass")
+
+const errorTextEl = document.getElementById("error-text")
+
+
+
+
+// 20 meters = 65.616 feet | 20 feet = 6.096 meters
+let metersToFeet = 0
+let feetToMeters = 0
+
+let litersToGallon = 0
+let gallonToLiters = 0
+
+let kilosToPounds = 0
+let poundsToKilos = 0
 
 convertBtn.addEventListener("click", function(){
+    
+    const value = inputEl.value.trim()
+
+
+
     if (!isNaN(inputEl.value)){
-        console.log(inputEl.value)
-        console.log(convertVolume("liters", inputEl.value))
-    }
+        errorTextEl.textContent = ""
+        // Length Conversion
+        metersToFeet = convertLength("meter", value)
+        feetToMeters = convertLength("feet", value)
+
+        // Volume Conversion
+        litersToGallon = convertVolume("liters", value)
+        gallonToLiters = convertVolume("gallons", value)
+
+
+        // Mass Conversion
+        kilosToPounds = convertMass("kilos", value)
+        poundsToKilos = convertMass("pounds", value)
+
+        lengthEl.textContent = `${value} meters = ${metersToFeet} feet | ${value} feet = ${feetToMeters} meters`
+        volumeEl.textContent = `${value} liters = ${litersToGallon} gallons | ${value} gallons = ${gallonToLiters} liters`
+        massEl.textContent = `${value} kilos = ${kilosToPounds} pounds | ${value} pounds = ${poundsToKilos} kilos`   
+    } 
+
     else{
-        console.log("Not a number")
+        reset()
+        errorTextEl.textContent = `${value} is not a number` 
     }
+
+    
 })
+
+function reset(){
+    lengthEl.textContent = ""
+    volumeEl.textContent = ""
+    massEl.textContent = ""
+}
+
+
 
 
 
@@ -50,3 +100,7 @@ function convertMass(metric,val){
         return (Number(val) * 0.453592).toFixed(3)
     }
 }
+
+
+
+
