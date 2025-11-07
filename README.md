@@ -13,10 +13,10 @@ A small, client-side Unit Converter built for the Scrimba Full Stack Developer c
 - Conversion results update automatically.
 
 ## Project structure (typical)
-- `index.html` — main HTML page and app entry.
-- `index.css`  — styling and responsive rules.
-- `index.js`   — conversion logic and event handlers.
-- `README.md`  — this file.
+- `index.html` -- main HTML page and app entry.
+- `index.css`  -- styling and responsive rules.
+- `index.js`   -- conversion logic and event handlers.
+- `README.md`  -- This file.
 
 
 ## Implementation notes
